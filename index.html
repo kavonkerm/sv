@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>San Valentín 💘</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 400px;
+      animation: fadeIn 1s ease;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="content">
+    <h1>💘 Hola amor 💘</h1>
+    <p>Quería preguntarte algo muy importante…</p>
+    <h2>¿Te gustaría ser mi enamorada?</h2>
+    <button onclick="mostrarAmor()">Sí 💕</button>
+  </div>
+
+  <script>
+    function mostrarAmor() {
+      document.getElementById("content").innerHTML = `
+        <h1>🥰 Te amo 🥰</h1>
+        <p>Gracias por hacerme tan feliz</p>
+        <img src="imagen_ia.jpg" alt="Nosotros">
+      `;
+    }
+  </script>
+
+</body>
+</html>
