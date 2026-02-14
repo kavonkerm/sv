@@ -28,6 +28,7 @@
       animation: fadeIn 1s ease;
       position: relative;
       z-index: 2;
+      transition: transform 0.3s ease;
     }
 
     h1 {
@@ -74,21 +75,24 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Confetti hearts */
+    /* 💖 Corazones explosivos */
     .heart {
       position: fixed;
-      top: -10px;
-      font-size: 20px;
-      animation: fall linear forwards;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: explode 1.8s ease-out forwards;
       z-index: 1;
     }
 
-    @keyframes fall {
+    @keyframes explode {
       to {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(720deg);
         opacity: 0;
       }
     }
+
   </style>
 </head>
 
@@ -104,26 +108,43 @@
   <script>
     function mostrarAmor() {
 
+      const card = document.getElementById("content");
+
+      // Pequeño efecto rebote
+      card.style.transform = "scale(1.05)";
+      setTimeout(() => {
+        card.style.transform = "scale(1)";
+      }, 200);
+
       // Cambiar contenido
-      document.getElementById("content").innerHTML = `
+      card.innerHTML = `
         <h1>🥰 Te amo 🥰</h1>
         <p>Gracias por hacerme tan feliz ❤️</p>
-        <img src="sanvalentinAmor.jpg" alt="Nosotros">
+        <img src="sanvalentinAmor.png" alt="Nosotros">
       `;
 
-      // Generar confetti de corazones
-      for (let i = 0; i < 40; i++) {
+      // 💥 Explosión de corazones 360°
+      for (let i = 0; i < 70; i++) {
+
         let heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
-        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+        let angle = Math.random() * 2 * Math.PI;
+        let distance = Math.random() * 300 + 100;
+
+        let x = Math.cos(angle) * distance;
+        let y = Math.sin(angle) * distance;
+
+        heart.style.setProperty('--x', x + 'px');
+        heart.style.setProperty('--y', y + 'px');
+        heart.style.fontSize = (Math.random() * 25 + 20) + "px";
+
         document.body.appendChild(heart);
 
         setTimeout(() => {
           heart.remove();
-        }, 4000);
+        }, 1800);
       }
     }
   </script>
